@@ -1,42 +1,33 @@
 
 section header{
     border-top: 1px solid var(--stroke-color);
-    padding-block: 12px 24px;
+    padding-block: .75rem 1.5rem;
     font: var(--text-span);
 
 
-     a{
-        justify-self: end;
-        align-items: center;
-        gap: 8px;
-
-        span{
-            background-image: url(../assents/icons/ArrowRight.svg);
-            height: 16px;
-            width: 16px;
-        }
-
-        &:hover span{
-            background-image: url(../assents/icons/ArrowRight-hover.svg);
-        }
-
-    }
     
+
 }
+    
+
 
 
 #featured{
     grid-area: featured;
-    img{
-        block-size: 100%;
+
+    #primeira{
+        height: 30rem;
         object-fit: cover;
-        
+    }
+    img{
+        height: 100%;
+        object-fit: cover;
     }
 }
 
 .card{
     position: relative;
-    border-radius: 4px;
+    border-radius: .25rem;
     overflow: hidden;
 
     &::before{ /*O & nesse contexto está fazendo o mesmo que que .card::before{}*/
@@ -57,14 +48,14 @@ section header{
         position: absolute;
         inset-block-end: 0;
 
-        padding: 24px;
+        padding: 1.5rem;
 
         &:has(.text-lg){
-            padding: 12px;
+            padding: .75rem;
         }
 
         h2{
-            margin-block-start: 8px;
+            margin-block-start: .5rem;
         }
     }
 }   
@@ -73,12 +64,12 @@ section header{
 
     grid-area: weekly;
 
-    &>div{
-        grid-template-columns:repeat(4, 292px);
+        &>div{
+        grid-template-columns:repeat(4, 18.25rem);
     }
     
     img {
-        block-size: 160px;
+        block-size: 10rem;
 
     }
 
@@ -87,12 +78,12 @@ section header{
 
         .content-tag{
             position: absolute;
-            top: 8px;
-            left: 8px;
+            top: .5rem;
+            left: .5rem;
         }
 
         p{
-            margin-top: 8px;
+            margin-top: .5rem;
             font-weight: 800;
         }
     }
@@ -100,61 +91,14 @@ section header{
 
 }
 
-#ai{
-    grid-area: ai;
-    img{
-        width: 176px;
-        aspect-ratio: 1/1;/*serve para deixar a imagem quadrada*/
-        object-fit: cover;/*serv para a imagem cobrir toda a area*/
-
-    }
-
-    h3{
-        margin-block: 8px 4px ;
-
-    }
-
-}
-aside{
-    grid-area: aside;
-}
 
 
-#more{
-    margin-top: 32px;
-    h3{
-        margin-top: 8px;
-    }
 
-    img{
-        width: 72px;
-        aspect-ratio: 1/1;/*Deixa a imagem em um quadrado perfeiro*/
-        object-fit: cover; /*Faz que a imagem ocupe toda a area designada para ela*/
-    }
+
+
 
     
 
   
-}
 
-a.teste{
-    display: grid;
-    justify-self: end;
-    align-items: center;
-    gap: 8px;
 
-    
-
-    span{
-        
-        background-image: url(../assents/icons/ArrowRight.svg);
-        height: 16px;
-        width: 16px;
-    }
-
-    &:hover span{
-        
-        background-image: url(../assents/icons/ArrowRight-hover.svg);
-    }
-
-}
