@@ -78,3 +78,9 @@ main{
     color: var(--text-color-primary);
     box-shadow: 0px 4px 16px rgba(2,6,23,0.251);
 }
+
+footer{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
