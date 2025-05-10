@@ -1,10 +1,11 @@
 #primary{
-    padding-block: 20px;/*seve para marca tanto no eixo x e y o valor marcado*/
+    padding-block: 1.25rem;/*seve para marca tanto no eixo x e y o valor marcado*/
 
     div{
         display: flex;
         align-items: center;
-        gap: 8px;
+        justify-content: center;
+        gap: 0.5rem;
     }
 
     /*nesting css(serve para procurar o filho dentro do conteudo principal e deixa mais organizado)*/
@@ -20,8 +21,8 @@
 }
 
 #secondary{
-    padding-block:14px ;
+    padding-block:0.875rem ;
     border: solid 1px var(--stroke-color);
-    border-inline:none ;
+    border-inline: none;
     justify-content: space-between;
 }
