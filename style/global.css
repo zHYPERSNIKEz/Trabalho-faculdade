@@ -49,9 +49,8 @@ img{
 
 .container{
     max-width: 80rem;
-    padding-inline:2rem;
+    padding-inline: 2rem;
     margin-inline:auto;
-    
 }
 
 main{
@@ -71,7 +70,7 @@ main{
     display: inline-block;
     background-color: var(--brand-color-dark);
     padding: .25rem .5rem;
-    border-radius: 4px;
+    border-radius: .25rem;
     font: 500 .625rem/1.2 var(--font-family);
     text-transform: uppercase;
     letter-spacing: 0.04em;
@@ -83,4 +82,5 @@ footer{
     display: flex;
     align-items: center;
     justify-content: center;
+    margin-bottom: 1.25rem;
 }
