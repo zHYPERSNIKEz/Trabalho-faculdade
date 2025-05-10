@@ -1,0 +1,107 @@
+/* Estilo para o título POLÍTICA */
+.politica-title-container {
+    text-align: center;
+    margin: 3rem 0;
+    padding: 0 1rem;
+}
+
+.politica-title {
+    font-family: var(--font-family);
+    font-weight: 800;
+    font-size: 3.5rem;
+    color: var(--text-color-primary);
+    text-transform: uppercase;
+    margin: 0;
+    letter-spacing: 1px;
+}
+
+/* Container principal do conteúdo */
+.politica-content {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+/* Estilo para cada artigo */
+.politica-article {
+    margin-bottom: 3rem;
+}
+
+.politica-article h2 {
+    font-family: var(--font-family);
+    font-weight: 800;
+    font-size: 1.8rem;
+    color: var(--text-color-primary);
+    text-align: center;
+    margin-bottom: 1.5rem;
+    text-transform: uppercase;
+}
+
+.article-divider {
+    border: none;
+    height: 2px;
+    background-color: var(--brand-color-light);
+    width: 100px;
+    margin: 0 auto 2rem auto;
+}
+
+.article-content {
+    display: flex;
+    gap: 2rem;
+    align-items: flex-start;
+}
+
+.article-image {
+    flex: 0 0 40%;
+    max-width: 400px;
+}
+
+.article-image img {
+    width: 100%;
+    border-radius: 4px;
+}
+
+.article-text {
+    flex: 1;
+}
+
+.article-text h3 {
+    font-family: var(--font-family);
+    font-weight: 800;
+    font-size: 1.4rem;
+    color: var(--text-color-primary);
+    margin-bottom: 1rem;
+}
+
+.article-text p {
+    font-family: var(--font-family);
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: var(--text-color-primary);
+    margin-bottom: 1rem;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .politica-title {
+        font-size: 2.5rem;
+    }
+    
+    .article-content {
+        flex-direction: column;
+    }
+    
+    .article-image {
+        width: 100%;
+        max-width: 100%;
+        margin-bottom: 1.5rem;
+    }
+    
+    .politica-article h2 {
+        font-size: 1.5rem;
+    }
+    
+    .article-text h3 {
+        font-size: 1.2rem;
+    }
+}
