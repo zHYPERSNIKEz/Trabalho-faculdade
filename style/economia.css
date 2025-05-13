@@ -30,6 +30,22 @@ body {
   text-shadow: 0 0.125rem 0.3125rem rgba(0, 0, 0, 0.7);
 }
 
+.card a {
+  color: #00f; /* ou branco, conforme desejar */
+  text-decoration: underline;
+  z-index: 5;
+  position: relative;
+  color: white; /* Cor normal do link */
+  text-decoration: none;
+  transition: color 0.3s ease; /* Suaviza a troca de cor */
+}
+
+.card a:hover {
+  color: #00aaff; /* Azul claro no hover */
+  text-decoration: underline; /* Opcional */
+}
+
+
 .carousel-button {
   position: absolute;
   top: 50%;
