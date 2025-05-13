@@ -1,3 +1,30 @@
 @import url(../style/index.css);
+#titulo{
+    text-align: center;
+    margin: 1.125rem 0 0 0;
+
+}
 
 
+.inicio{
+    display: grid;
+    justify-items: center;
+    align-items: center;
+    margin: .4rem;
+    padding: 1.2rem;
+/* Garante que o h1 não cause o efeito ao passar o mouse sobre ele */
+   & .card{
+    transition: .2s;
+   }
+   
+   &:hover .card{
+    filter: blur(5px);
+    opacity: 0.5;
+   }
+
+   & .card:hover{
+    filter: none;
+    opacity: 1;
+    transform: scale(1.03);
+   }
+}
