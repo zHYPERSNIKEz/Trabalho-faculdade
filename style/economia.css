@@ -22,6 +22,7 @@ body {
   background-size: cover;
   background-position: center;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   color: white;
@@ -31,6 +32,7 @@ body {
 }
 
 .card a {
+  display: block;
   color: #00f; /* ou branco, conforme desejar */
   text-decoration: underline;
   z-index: 5;
@@ -38,6 +40,15 @@ body {
   color: white; /* Cor normal do link */
   text-decoration: none;
   transition: color 0.3s ease; /* Suaviza a troca de cor */
+  font-size: .9375rem;
+}
+
+.card-link {
+  margin-top:1rem;
+  font-size: large 0.9rem;
+  text-align: center;
+  max-width: 90%;
+  word-break: break-word;
 }
 
 .card a:hover {
