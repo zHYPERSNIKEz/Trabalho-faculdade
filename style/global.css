@@ -51,19 +51,17 @@ img{
     max-width: 80rem;
     padding-inline: 2rem;
     margin-inline:auto;
+    margin-top: 1rem;
 }
 
 main{
-    margin-top:2.5rem;
-    row-gap: 5rem;
+    margin:1rem;
+    row-gap: 2rem;
     column-gap: 2rem;
 
     grid-template-columns: 2fr 1.5fr;
 
-    grid-template-areas: 
-    "featured featured"
-    "weekly weekly"
-    "ai aside";
+    grid-template-areas: 1fr 1fr;
 }
 
 .content-tag{
@@ -82,5 +80,5 @@ footer{
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 1.25rem;
+    margin:  .6rem 1.25rem 1.25rem 1.25rem;
 }

@@ -13,12 +13,14 @@ section header{
 
 
 #featured{
+
     grid-area: featured;
 
     #primeira{
         height: 30rem;
         object-fit: cover;
     }
+
     img{
         height: 100%;
         object-fit: cover;
