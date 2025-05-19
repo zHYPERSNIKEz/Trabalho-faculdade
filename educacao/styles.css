@@ -28,3 +28,32 @@
     transform: scale(1.03);
    }
 }
+
+main{
+    display: flex;
+    flex-direction: column;
+    margin: 3.125rem .625rem 3.125rem 3.125rem;
+
+    aside{
+        border-top: 2px rgb(34, 34, 34) solid;
+        padding-top: 1.25rem;
+        
+
+        &.cads{
+            display: flex;
+            gap: .30rem;
+            max-width: 1000px;
+        }
+
+        
+    }
+
+
+    img{
+        height: 18rem;
+    }
+
+    .unica{
+        height: 13rem;
+    }
+}
