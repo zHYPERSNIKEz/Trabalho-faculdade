@@ -1,1 +1,60 @@
 @import url(../style/index.css);
+#titulo{
+    text-align: center;
+    margin: 1.125rem 0 .0 0;
+
+}
+
+
+
+
+
+.inicio{
+    display: grid;
+    justify-items: center;
+    align-items: center;
+    margin: .4rem;
+    padding: 1.2rem;
+
+    & img{
+        height: 26rem;
+    }
+
+}
+
+main{
+    display: flex;
+    flex-direction: column;
+    margin: 3.125rem .625rem 3.125rem 3.125rem;
+
+    .subTitulo{
+        text-align: center;
+        margin: 1.125rem;
+    }
+
+    .containerCards{
+        display: flex;
+        gap: 5rem;
+        border-top: 2px rgb(34, 34, 34) solid;
+
+        & aside{
+            max-width: 25rem;
+            
+            padding-top: 1.25rem;
+            
+    
+            &.cads{
+                display: flex;
+                gap: .30rem;
+                max-width: 1000px;
+            }
+    
+            & img{
+                height: 25rem;
+            }
+            
+        }
+
+    }
+    
+}
