@@ -25,15 +25,18 @@
 main{
     display: flex;
     flex-direction: column;
-    margin: 3.125rem .625rem 3.125rem 3.125rem;
+    margin: 1rem 4rem 4rem 4rem;
 
     .subTitulo{
         text-align: center;
         margin: 1.125rem;
     }
 
+
+    
     .containerCards{
         display: flex;
+
         gap: 5rem;
         border-top: 2px rgb(34, 34, 34) solid;
 
@@ -51,6 +54,7 @@ main{
     
             & img{
                 height: 25rem;
+                object-fit: cover;
             }
             
         }
