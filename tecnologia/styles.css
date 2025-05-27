@@ -53,8 +53,9 @@ main{
             }
     
             & img{
-                height: 25rem;
+                height: 22rem;
                 object-fit: cover;
+                border-radius: 2px;
             }
             
         }
