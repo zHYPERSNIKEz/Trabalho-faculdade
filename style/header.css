@@ -1,5 +1,8 @@
 #primary{
-    padding-block: 1.25rem;/*seve para marca tanto no eixo x e y o valor marcado*/
+    /*padding-block: 1.25rem;/*seve para marca tanto no eixo x e y o valor marcado*/
+    display: flex;
+    justify-content: center;
+    padding-block: 1.25rem;
 
     div{
         display: flex;
