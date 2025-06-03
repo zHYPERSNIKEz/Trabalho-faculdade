@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Vagas Publicadas</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 2rem;
+      background-color: #f4f4f4;
+    }
+    h2 {
+      color: #333;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1rem;
+      background-color: #fff;
+    }
+    th, td {
+      padding: 0.8rem;
+      border: 1px solid #ccc;
+      text-align: left;
+    }
+    th {
+      background-color: #eaeaea;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Vagas Publicadas</h2>
+  <table id="tabelaVagas">
+    <thead>
+      <tr>
+        <th>CNPJ</th>
+        <th>Empresa</th>
+        <th>Email</th>
+        <th>Vaga</th>
+        <th>Tipo</th>
+        <th>Publicado por</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Conteúdo gerado pelo JavaScript -->
+    </tbody>
+  </table>
+
+  <script>
+    function carregarVagas() {
+      const vagas = JSON.parse(localStorage.getItem('vagas')) || [];
+      const tbody = document.querySelector("#tabelaVagas tbody");
+      tbody.innerHTML = '';
+
+      if (vagas.length === 0) {
+        const row = tbody.insertRow();
+        const cell = row.insertCell();
+        cell.colSpan = 6;
+        cell.textContent = "Nenhuma vaga publicada.";
+        cell.style.textAlign = 'center';
+        return;
+      }
+
+      vagas.forEach(vaga => {
+        const row = tbody.insertRow();
+        row.insertCell().textContent = vaga.cnpj;
+        row.insertCell().textContent = vaga.empresa;
+        row.insertCell().textContent = vaga.email;
+        row.insertCell().textContent = vaga.vaga;
+        row.insertCell().textContent = vaga.contratacao;
+        row.insertCell().textContent = vaga.publicadoPor;
+      });
+    }
+
+    // Carrega as vagas assim que a página for aberta
+    window.onload = carregarVagas;
+  </script>
+
+</body>
+</html>

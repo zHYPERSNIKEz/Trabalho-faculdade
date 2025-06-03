@@ -1,91 +1,93 @@
-function adicionarVaga() {
-  const cnpj = document.getElementById('cnpj').value;
-  const empresa = document.getElementById('empresa').value;
-  const email = document.getElementById('email').value;
-  const vaga = document.getElementById('vaga').value;
-  const contratacao = document.getElementById('contratacao').value;
-
-  if (!cnpj || !empresa || !email || !vaga || !contratacao) {
-    alert("Preencha todos os campos!");
-    return;
-  }
-
-  const tabela = document.getElementById('tabelaVagas');
-  const novaLinha = tabela.insertRow();
-
-  novaLinha.insertCell(0).textContent = cnpj;
-  novaLinha.insertCell(1).textContent = empresa;
-  novaLinha.insertCell(2).textContent = email;
-  novaLinha.insertCell(3).textContent = vaga;
-  novaLinha.insertCell(4).textContent = contratacao;
-
-  // Limpa os campos
-  document.getElementById('cnpj').value = '';
-  document.getElementById('empresa').value = '';
-  document.getElementById('email').value = '';
-  document.getElementById('vaga').value = '';
-  document.getElementById('contratacao').value = 'CLT';
-}
-
-// Função chamada ao carregar a página
 window.onload = function () {
-  carregarVagasSalvas();
+  const usuario = JSON.parse(localStorage.getItem('usuarioLogado'));
+  if (usuario) {
+    document.getElementById('authSection').style.display = 'none';
+    document.getElementById('vagaSection').style.display = 'block';
+    document.getElementById('userNome').textContent = usuario.nome;
+  }
 };
 
-function adicionarVaga() {
-  const cnpj = document.getElementById('cnpj').value;
-  const empresa = document.getElementById('empresa').value;
-  const email = document.getElementById('email').value;
-  const vaga = document.getElementById('vaga').value;
-  const contratacao = document.getElementById('contratacao').value;
+function mostrarCadastro() {
+  document.getElementById('authSection').style.display = 'none';
+  document.getElementById('cadastroSection').style.display = 'block';
+}
 
-  if (!cnpj || !empresa || !email || !vaga || !contratacao) {
-    alert("Preencha todos os campos!");
+function cancelarCadastro() {
+  document.getElementById('cadastroSection').style.display = 'none';
+  document.getElementById('authSection').style.display = 'block';
+}
+
+function cadastrar() {
+  const nome = document.getElementById('nomeCadastro').value;
+  const email = document.getElementById('emailCadastro').value;
+  const senha = document.getElementById('senhaCadastro').value;
+
+  if (!nome || !email || !senha) {
+    alert("Preencha todos os campos");
     return;
   }
 
-  // Cria um objeto com os dados
-  const novaVaga = {
+  const usuarios = JSON.parse(localStorage.getItem('usuarios')) || [];
+  if (usuarios.find(u => u.email === email)) {
+    alert("Email já cadastrado");
+    return;
+  }
+
+  usuarios.push({ nome, email, senha });
+  localStorage.setItem('usuarios', JSON.stringify(usuarios));
+  alert("Cadastro realizado com sucesso");
+  cancelarCadastro();
+}
+
+function login() {
+  const email = document.getElementById('emailLogin').value;
+  const senha = document.getElementById('senhaLogin').value;
+
+  const usuarios = JSON.parse(localStorage.getItem('usuarios')) || [];
+  const usuario = usuarios.find(u => u.email === email && u.senha === senha);
+
+  if (!usuario) {
+    alert("Usuário ou senha inválidos");
+    return;
+  }
+
+  localStorage.setItem('usuarioLogado', JSON.stringify(usuario));
+  location.reload();
+}
+
+function logout() {
+  localStorage.removeItem('usuarioLogado');
+  location.reload();
+}
+
+function publicarVaga() {
+  const cnpj = document.getElementById('cnpj').value;
+  const empresa = document.getElementById('empresa').value;
+  const email = document.getElementById('emailEmpresa').value;
+  const vaga = document.getElementById('vaga').value;
+  const contratacao = document.getElementById('contratacao').value;
+
+  const usuario = JSON.parse(localStorage.getItem('usuarioLogado'));
+  if (!usuario) {
+    alert("Você precisa estar logado");
+    return;
+  }
+
+  const vagas = JSON.parse(localStorage.getItem('vagas')) || [];
+  vagas.push({
     cnpj,
     empresa,
     email,
     vaga,
-    contratacao
-  };
+    contratacao,
+    publicadoPor: usuario.nome
+  });
 
-  // Pega o array atual do localStorage ou cria um novo
-  const vagas = JSON.parse(localStorage.getItem('vagas')) || [];
-
-  // Adiciona a nova vaga
-  vagas.push(novaVaga);
-
-  // Salva de volta no localStorage
   localStorage.setItem('vagas', JSON.stringify(vagas));
+  alert("Vaga publicada!");
 
-  // Adiciona na tabela
-  adicionarLinhaNaTabela(novaVaga);
-
-  // Limpa os campos
   document.getElementById('cnpj').value = '';
   document.getElementById('empresa').value = '';
-  document.getElementById('email').value = '';
+  document.getElementById('emailEmpresa').value = '';
   document.getElementById('vaga').value = '';
-  document.getElementById('contratacao').value = 'CLT';
 }
-
-function adicionarLinhaNaTabela(vaga) {
-  const tabela = document.getElementById('tabelaVagas');
-  const novaLinha = tabela.insertRow();
-
-  novaLinha.insertCell(0).textContent = vaga.cnpj;
-  novaLinha.insertCell(1).textContent = vaga.empresa;
-  novaLinha.insertCell(2).textContent = vaga.email;
-  novaLinha.insertCell(3).textContent = vaga.vaga;
-  novaLinha.insertCell(4).textContent = vaga.contratacao;
-}
-
-function carregarVagasSalvas() {
-  const vagas = JSON.parse(localStorage.getItem('vagas')) || [];
-  vagas.forEach(vaga => adicionarLinhaNaTabela(vaga));
-}
-    
