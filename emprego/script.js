@@ -91,3 +91,27 @@ function publicarVaga() {
   document.getElementById('emailEmpresa').value = '';
   document.getElementById('vaga').value = '';
 }
+
+function mostrarVagas() {
+  const vagas = JSON.parse(localStorage.getItem('vagas')) || [];
+  const container = document.getElementById('lista-vagas');
+
+  if (!container) return;
+
+  container.innerHTML = '';
+
+  vagas.forEach(vaga => {
+    const div = document.createElement('div');
+    div.className = 'card-vaga';
+
+    div.innerHTML = `
+      <h3>${vaga.nome || vaga.vaga}</h3>
+      <p><strong>Email:</strong> ${vaga.email}</p>
+      <p><strong>Empresa:</strong> ${vaga.empresa}</p>
+    `;
+
+    container.appendChild(div);
+  });
+}
+
+window.addEventListener('DOMContentLoaded', mostrarVagas);

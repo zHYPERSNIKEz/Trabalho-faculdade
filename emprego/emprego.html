@@ -25,11 +25,12 @@
         </div>
 
             <div class="login ">
-                <a href="">
+                <a href="login.html">
                     <img src="assents/login-de-usuario.png" alt="icone de login">
                     <span link href ="login.html">Login</span>
                 </a>
-                    
+                </div>
+           
         </nav>
         <nav id="secondary" class="grid grid-flow-col">
             <a href="../index.html">Página Inicial</a>
@@ -41,52 +42,12 @@
         </nav>
     </header>
 
-   <!-- Após seu header e nav, adicione: -->
-
-<main style="padding: 2rem;">
-
-  <!-- Seção de Autenticação -->
-  <div id="authSection">
-    <h2>Login</h2>
-    <label>Email: <input type="email" id="emailLogin"></label><br>
-    <label>Senha: <input type="password" id="senhaLogin"></label><br>
-    <button onclick="login()">Entrar</button>
-    <button onclick="mostrarCadastro()">Cadastrar</button>
-  </div>
-
-  <!-- Cadastro de novo usuário -->
-  <div id="cadastroSection" style="display: none;">
-    <h2>Cadastrar Novo Usuário</h2>
-    <label>Nome: <input type="text" id="nomeCadastro"></label><br>
-    <label>Email: <input type="email" id="emailCadastro"></label><br>
-    <label>Senha: <input type="password" id="senhaCadastro"></label><br>
-    <button onclick="cadastrar()">Cadastrar</button>
-    <button onclick="cancelarCadastro()">Cancelar</button>
-  </div>
-
-  <!-- Seção de Vaga (só aparece logado) -->
-  <div id="vagaSection" style="display: none;">
-    <h2>Bem-vindo, <span id="userNome"></span> <button onclick="logout()">Sair</button></h2>
-    <h3>Cadastrar Vaga</h3>
-    <label>CNPJ: <input type="text" id="cnpj"></label><br>
-    <label>Empresa: <input type="text" id="empresa"></label><br>
-    <label>Email da Empresa: <input type="email" id="emailEmpresa"></label><br>
-    <label>Vaga: <input type="text" id="vaga"></label><br>
-    <label>Tipo de Contratação:
-      <select id="contratacao">
-        <option value="CLT">CLT</option>
-        <option value="PJ">PJ</option>
-        <option value="Freelancer">Freelancer</option>
-        <option value="Estágio">Estágio</option>
-      </select>
-    </label><br>
-    <button onclick="publicarVaga()">Publicar Vaga</button>
-  </div>
-
-  <p><a href="vagas.html">Ver vagas publicadas</a></p>
+    <main class="container">
+  <h1>Vagas de Emprego</h1>
+  <div id="lista-vagas"></div>
 </main>
 
- 
+
 
 <footer>© Copyright 2024 Grupo CMR Turma 2701. Todos os direitos reservados.</footer>
 </body>
