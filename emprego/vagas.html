@@ -1,81 +1,632 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <title>Vagas Publicadas</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      padding: 2rem;
-      background-color: #f4f4f4;
-    }
-    h2 {
-      color: #333;
-    }
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 1rem;
-      background-color: #fff;
-    }
-    th, td {
-      padding: 0.8rem;
-      border: 1px solid #ccc;
-      text-align: left;
-    }
-    th {
-      background-color: #eaeaea;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <title>Vagas Publicadas</title>
+    <link rel="stylesheet" href="../style/index.css">
+    <link rel="stylesheet" href="../style/vagas.css">
 </head>
 <body>
+    <header class="container">
+        <nav id="primary" class="grid grid-flow-col">
+        <div>
+            <img src="../assents/logomarca.svg" alt="Logotipo da TechNews em fonte azul moderna ao lado de um ícone estilizado de jornal, transmitindo ambiente profissional e confiável de notícias">
+        </div>
+        </nav>
+        <nav id="secondary" class="grid grid-flow-col">
+            <a href="../index.html">Página Inicial</a>
+            <a href="../educacao/educacao.html">Educação</a>
+            <a href="../economia/economia.html">Economia</a>
+            <a href="../emprego/vagas.html">Empregos</a>
+            <a href="../politica/politica.html">Política</a>
+            <a href="../tecnologia/tecnologia.html">Tecnologia</a>
+        </nav>
+    </header>
+    <div class="container">
+        <h1>Vagas Disponíveis</h1>
+        
+        <div class="filtros" style="display: flex; align-items: center; justify-content: space-between;">
+            <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; align-items: center;">
+                <input type="text" id="busca" placeholder="Buscar por título ou empresa...">
+                <select id="filtroTipo">
+                    <option value="">Todos os tipos</option>
+                    <option value="CLT">CLT</option>
+                    <option value="PJ">PJ</option>
+                    <option value="Estágio">Estágio</option>
+                </select>
+                <select id="filtroLocal">
+                    <option value="">Todas as localidades</option>
+                    <option value="São Paulo">São Paulo</option>
+                    <option value="Rio de Janeiro">Rio de Janeiro</option>
+                    <option value="Belo Horizonte">Belo Horizonte</option>
+                    <option value="Remoto">Remoto</option>
+                </select>
+            </div>
+            <button id="btnCadastrarVaga" class="btn-cadastrar-vaga">Cadastrar Vaga</button>
+        </div>
 
-  <h2>Vagas Publicadas</h2>
-  <table id="tabelaVagas">
-    <thead>
-      <tr>
-        <th>CNPJ</th>
-        <th>Empresa</th>
-        <th>Email</th>
-        <th>Vaga</th>
-        <th>Tipo</th>
-        <th>Publicado por</th>
-      </tr>
-    </thead>
-    <tbody>
-      <!-- Conteúdo gerado pelo JavaScript -->
-    </tbody>
-  </table>
+        <div class="vagas-grid" id="vagasGrid">
+        </div>
+    </div>
+    <div class="modal" id="modalCandidatura">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Candidatar-se à vaga</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <form id="formCandidatura">
+                <div class="form-group">
+                    <label for="nome">Nome Completo</label>
+                    <input type="text" id="nome" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">E-mail</label>
+                    <input type="email" id="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="telefone">Telefone</label>
+                    <input type="tel" id="telefone" required>
+                </div>
+                <div class="form-group">
+                    <label for="curriculo">Currículo (PDF)</label>
+                    <input type="file" id="curriculo" accept=".pdf" required>
+                </div>
+                <button type="submit" class="btn-enviar">Enviar Candidatura</button>
+            </form>
+        </div>
+    </div>
+    <div class="modal" id="modalCadastroVaga">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Cadastrar Nova Vaga</h3>
+                <button class="close-modal-cadastro">&times;</button>
+            </div>
+            <form id="formCadastroVaga">
+                <div class="form-group">
+                    <label for="tituloVaga">Título da Vaga</label>
+                    <input type="text" id="tituloVaga" required>
+                </div>
+                <div class="form-group">
+                    <label for="empresaVaga">Empresa</label>
+                    <input type="text" id="empresaVaga" required>
+                </div>
+                <div class="form-group">
+                    <label for="localizacaoVaga">Localização</label>
+                    <input type="text" id="localizacaoVaga" required>
+                </div>
+                <div class="form-group">
+                    <label for="tipoVaga">Tipo</label>
+                    <select id="tipoVaga" required>
+                        <option value="CLT">CLT</option>
+                        <option value="PJ">PJ</option>
+                        <option value="Estágio">Estágio</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="salarioVaga">Faixa Salarial</label>
+                    <input type="text" id="salarioVaga" required>
+                </div>
+                <div class="form-group">
+                    <label for="requisitosVaga">Requisitos (um por linha)</label>
+                    <textarea id="requisitosVaga" rows="4" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="descricaoVaga">Descrição</label>
+                    <textarea id="descricaoVaga" rows="3" required></textarea>
+                </div>
+                <button type="submit" class="btn-enviar">Cadastrar</button>
+            </form>
+        </div>
+    </div>
+    <script>
+        const vagasFicticias = [
+            {
+                titulo: "Desenvolvedor Full Stack",
+                empresa: "Tech Solutions",
+                localizacao: "São Paulo",
+                tipo: "CLT",
+                salario: "R$ 8.000 - R$ 12.000",
+                requisitos: [
+                    "Experiência com React e Node.js",
+                    "Conhecimento em banco de dados SQL e NoSQL",
+                    "Inglês intermediário",
+                    "Git e metodologias ágeis"
+                ],
+                descricao: "Empresa de tecnologia em crescimento busca desenvolvedor para atuar em projetos inovadores."
+            },
+            {
+                titulo: "Analista de Marketing Digital",
+                empresa: "Digital Marketing Pro",
+                localizacao: "Remoto",
+                tipo: "PJ",
+                salario: "R$ 5.000 - R$ 7.000",
+                requisitos: [
+                    "Experiência com redes sociais",
+                    "Conhecimento em SEO",
+                    "Google Analytics",
+                    "Criação de conteúdo"
+                ],
+                descricao: "Agência de marketing digital busca profissional para gerenciar campanhas de clientes."
+            },
+            {
+                titulo: "Estagiário de RH",
+                empresa: "Recursos Humanos Brasil",
+                localizacao: "Rio de Janeiro",
+                tipo: "Estágio",
+                salario: "R$ 1.500 + benefícios",
+                requisitos: [
+                    "Cursando Administração ou Psicologia",
+                    "Conhecimento em Excel",
+                    "Boa comunicação",
+                    "Disponibilidade de 6h diárias"
+                ],
+                descricao: "Empresa de consultoria em RH oferece oportunidade de estágio para estudantes."
+            },
+            {
+                titulo: "Analista Financeiro",
+                empresa: "Finanças & Investimentos",
+                localizacao: "Belo Horizonte",
+                tipo: "CLT",
+                salario: "R$ 6.000 - R$ 8.000",
+                requisitos: [
+                    "Formação em Administração, Economia ou Contabilidade",
+                    "Experiência com análise de investimentos",
+                    "Conhecimento em Excel avançado",
+                    "Inglês fluente"
+                ],
+                descricao: "Empresa de investimentos busca profissional para análise de oportunidades financeiras."
+            },
+            {
+                titulo: "Designer UX/UI",
+                empresa: "Creative Design Studio",
+                localizacao: "São Paulo",
+                tipo: "CLT",
+                salario: "R$ 7.000 - R$ 9.000",
+                requisitos: [
+                    "Experiência com Figma",
+                    "Portfólio de projetos",
+                    "Conhecimento em design responsivo",
+                    "Experiência com pesquisa de usuários"
+                ],
+                descricao: "Estúdio de design busca profissional para criar interfaces intuitivas e atraentes."
+            },
+            {
+                titulo: "Analista de Dados",
+                empresa: "Data Analytics Corp",
+                localizacao: "Remoto",
+                tipo: "PJ",
+                salario: "R$ 6.500 - R$ 8.500",
+                requisitos: [
+                    "Python e SQL",
+                    "Power BI ou Tableau",
+                    "Análise estatística",
+                    "Experiência com big data"
+                ],
+                descricao: "Empresa de análise de dados busca profissional para transformar dados em insights."
+            },
+            {
+                titulo: "Gerente de Projetos",
+                empresa: "Project Management Solutions",
+                localizacao: "São Paulo",
+                tipo: "CLT",
+                salario: "R$ 10.000 - R$ 15.000",
+                requisitos: [
+                    "PMP ou Scrum Master",
+                    "Experiência em gestão de equipes",
+                    "Metodologias ágeis",
+                    "Inglês avançado"
+                ],
+                descricao: "Empresa de consultoria busca gerente de projetos para liderar equipes e projetos."
+            },
+            {
+                titulo: "Estagiário de Marketing",
+                empresa: "Marketing Jovem",
+                localizacao: "Rio de Janeiro",
+                tipo: "Estágio",
+                salario: "R$ 1.200 + benefícios",
+                requisitos: [
+                    "Cursando Marketing ou Publicidade",
+                    "Conhecimento em redes sociais",
+                    "Criatividade",
+                    "Boa comunicação"
+                ],
+                descricao: "Agência de marketing busca estagiário para auxiliar em campanhas digitais."
+            },
+            {
+                titulo: "Desenvolvedor Mobile",
+                empresa: "Mobile Apps Brasil",
+                localizacao: "Remoto",
+                tipo: "PJ",
+                salario: "R$ 7.000 - R$ 10.000",
+                requisitos: [
+                    "React Native ou Flutter",
+                    "Experiência com apps nativos",
+                    "Git",
+                    "Conhecimento em APIs"
+                ],
+                descricao: "Empresa de desenvolvimento mobile busca profissional para criar apps inovadores."
+            },
+            {
+                titulo: "Analista de Suporte",
+                empresa: "Tech Support Solutions",
+                localizacao: "Belo Horizonte",
+                tipo: "CLT",
+                salario: "R$ 3.000 - R$ 4.500",
+                requisitos: [
+                    "Conhecimento em Windows e Linux",
+                    "Inglês básico",
+                    "Boa comunicação",
+                    "Resolução de problemas"
+                ],
+                descricao: "Empresa de suporte técnico busca profissional para atendimento ao cliente."
+            },
+            {
+                titulo: "Analista de Qualidade",
+                empresa: "Quality Assurance Tech",
+                localizacao: "São Paulo",
+                tipo: "CLT",
+                salario: "R$ 4.000 - R$ 6.000",
+                requisitos: [
+                    "Experiência com testes",
+                    "Conhecimento em metodologias ágeis",
+                    "Automação de testes",
+                    "Documentação"
+                ],
+                descricao: "Empresa de tecnologia busca analista de QA para garantir qualidade dos produtos."
+            },
+            {
+                titulo: "Estagiário de TI",
+                empresa: "Tech Solutions",
+                localizacao: "Rio de Janeiro",
+                tipo: "Estágio",
+                salario: "R$ 1.400 + benefícios",
+                requisitos: [
+                    "Cursando Ciência da Computação",
+                    "Conhecimento básico em programação",
+                    "Windows e Linux",
+                    "Boa comunicação"
+                ],
+                descricao: "Empresa de tecnologia oferece estágio para estudantes de TI."
+            },
+            {
+                titulo: "Analista de Redes",
+                empresa: "Network Solutions",
+                localizacao: "São Paulo",
+                tipo: "CLT",
+                salario: "R$ 5.000 - R$ 7.000",
+                requisitos: [
+                    "CCNA ou equivalente",
+                    "Experiência com redes",
+                    "Segurança de redes",
+                    "Troubleshooting"
+                ],
+                descricao: "Empresa de infraestrutura busca analista de redes."
+            },
+            {
+                titulo: "Desenvolvedor Backend",
+                empresa: "Backend Solutions",
+                localizacao: "Remoto",
+                tipo: "PJ",
+                salario: "R$ 8.000 - R$ 12.000",
+                requisitos: [
+                    "Java ou Python",
+                    "Spring Boot ou Django",
+                    "Banco de dados",
+                    "APIs REST"
+                ],
+                descricao: "Empresa de desenvolvimento busca desenvolvedor backend."
+            },
+            {
+                titulo: "Analista de Segurança",
+                empresa: "Security Tech",
+                localizacao: "São Paulo",
+                tipo: "CLT",
+                salario: "R$ 7.000 - R$ 10.000",
+                requisitos: [
+                    "Certificação em segurança",
+                    "Experiência com pentest",
+                    "Análise de vulnerabilidades",
+                    "Inglês avançado"
+                ],
+                descricao: "Empresa de segurança busca analista para proteger sistemas."
+            },
+            {
+                titulo: "Estagiário de Design",
+                empresa: "Design Studio",
+                localizacao: "Belo Horizonte",
+                tipo: "Estágio",
+                salario: "R$ 1.300 + benefícios",
+                requisitos: [
+                    "Cursando Design",
+                    "Conhecimento em Adobe",
+                    "Criatividade",
+                    "Portfólio"
+                ],
+                descricao: "Estúdio de design busca estagiário para projetos criativos."
+            },
+            {
+                titulo: "Analista de BI",
+                empresa: "Business Intelligence",
+                localizacao: "São Paulo",
+                tipo: "CLT",
+                salario: "R$ 6.000 - R$ 8.000",
+                requisitos: [
+                    "Power BI",
+                    "SQL",
+                    "Análise de dados",
+                    "Excel avançado"
+                ],
+                descricao: "Empresa busca analista de BI para dashboards e relatórios."
+            },
+            {
+                titulo: "Desenvolvedor Frontend",
+                empresa: "Frontend Solutions",
+                localizacao: "Remoto",
+                tipo: "PJ",
+                salario: "R$ 7.000 - R$ 10.000",
+                requisitos: [
+                    "React ou Vue.js",
+                    "HTML/CSS/JavaScript",
+                    "Responsive design",
+                    "Git"
+                ],
+                descricao: "Empresa busca desenvolvedor frontend para interfaces modernas."
+            },
+            {
+                titulo: "Analista de Infraestrutura",
+                empresa: "Infra Solutions",
+                localizacao: "Rio de Janeiro",
+                tipo: "CLT",
+                salario: "R$ 5.000 - R$ 7.000",
+                requisitos: [
+                    "Windows Server",
+                    "Linux",
+                    "Virtualização",
+                    "Cloud"
+                ],
+                descricao: "Empresa busca analista de infraestrutura para manutenção de sistemas."
+            },
+            {
+                titulo: "Estagiário de Dados",
+                empresa: "Data Analytics",
+                localizacao: "São Paulo",
+                tipo: "Estágio",
+                salario: "R$ 1.500 + benefícios",
+                requisitos: [
+                    "Cursando Estatística",
+                    "Python básico",
+                    "Excel",
+                    "Análise de dados"
+                ],
+                descricao: "Empresa busca estagiário para análise de dados."
+            },
+            {
+                titulo: "Analista de Produto",
+                empresa: "Product Solutions",
+                localizacao: "São Paulo",
+                tipo: "CLT",
+                salario: "R$ 6.000 - R$ 8.000",
+                requisitos: [
+                    "Experiência com produtos digitais",
+                    "Análise de mercado",
+                    "Metodologias ágeis",
+                    "Inglês intermediário"
+                ],
+                descricao: "Empresa busca analista de produto para desenvolvimento de soluções."
+            },
+            {
+                titulo: "Desenvolvedor DevOps",
+                empresa: "DevOps Solutions",
+                localizacao: "Remoto",
+                tipo: "PJ",
+                salario: "R$ 9.000 - R$ 13.000",
+                requisitos: [
+                    "Docker e Kubernetes",
+                    "CI/CD",
+                    "AWS ou Azure",
+                    "Linux"
+                ],
+                descricao: "Empresa busca desenvolvedor DevOps para automação e infraestrutura."
+            },
+            {
+                titulo: "Analista de Customer Success",
+                empresa: "Customer Solutions",
+                localizacao: "São Paulo",
+                tipo: "CLT",
+                salario: "R$ 4.000 - R$ 6.000",
+                requisitos: [
+                    "Experiência com clientes",
+                    "Inglês intermediário",
+                    "Boa comunicação",
+                    "Resolução de problemas"
+                ],
+                descricao: "Empresa busca analista para sucesso do cliente."
+            },
+            {
+                titulo: "Estagiário de Marketing Digital",
+                empresa: "Digital Marketing",
+                localizacao: "Rio de Janeiro",
+                tipo: "Estágio",
+                salario: "R$ 1.400 + benefícios",
+                requisitos: [
+                    "Cursando Marketing",
+                    "Redes sociais",
+                    "Criação de conteúdo",
+                    "Analytics"
+                ],
+                descricao: "Empresa busca estagiário para marketing digital."
+            },
+            {
+                titulo: "Analista de Processos",
+                empresa: "Process Solutions",
+                localizacao: "Belo Horizonte",
+                tipo: "CLT",
+                salario: "R$ 5.000 - R$ 7.000",
+                requisitos: [
+                    "Lean Six Sigma",
+                    "Mapeamento de processos",
+                    "Excel avançado",
+                    "Gestão de projetos"
+                ],
+                descricao: "Empresa busca analista para otimização de processos."
+            },
+            {
+                titulo: "Desenvolvedor Python",
+                empresa: "Python Solutions",
+                localizacao: "Remoto",
+                tipo: "PJ",
+                salario: "R$ 7.000 - R$ 10.000",
+                requisitos: [
+                    "Python avançado",
+                    "Django ou Flask",
+                    "APIs",
+                    "Banco de dados"
+                ],
+                descricao: "Empresa busca desenvolvedor Python para projetos web."
+            },
+            {
+                titulo: "Analista de Testes",
+                empresa: "QA Solutions",
+                localizacao: "São Paulo",
+                tipo: "CLT",
+                salario: "R$ 4.000 - R$ 6.000",
+                requisitos: [
+                    "Testes manuais",
+                    "Automação básica",
+                    "Metodologias ágeis",
+                    "Documentação"
+                ],
+                descricao: "Empresa busca analista de testes para qualidade de software."
+            },
+            {
+                titulo: "Estagiário de Suporte",
+                empresa: "Support Solutions",
+                localizacao: "São Paulo",
+                tipo: "Estágio",
+                salario: "R$ 1.300 + benefícios",
+                requisitos: [
+                    "Cursando TI",
+                    "Windows básico",
+                    "Boa comunicação",
+                    "Inglês básico"
+                ],
+                descricao: "Empresa busca estagiário para suporte técnico."
+            },
+            {
+                titulo: "Analista de Cloud",
+                empresa: "Cloud Solutions",
+                localizacao: "Remoto",
+                tipo: "CLT",
+                salario: "R$ 8.000 - R$ 12.000",
+                requisitos: [
+                    "AWS ou Azure",
+                    "Infraestrutura cloud",
+                    "Segurança",
+                    "Automação"
+                ],
+                descricao: "Empresa busca analista para gestão de infraestrutura cloud."
+            }
+        ];
 
-  <script>
-    function carregarVagas() {
-      const vagas = JSON.parse(localStorage.getItem('vagas')) || [];
-      const tbody = document.querySelector("#tabelaVagas tbody");
-      tbody.innerHTML = '';
+        function criarCardVaga(vaga) {
+            return `
+                <div class="vaga-card">
+                    <h3 class="vaga-titulo">${vaga.titulo}</h3>
+                    <div class="vaga-empresa">${vaga.empresa}</div>
+                    <div class="vaga-info">📍 ${vaga.localizacao}</div>
+                    <div class="vaga-info">📋 ${vaga.tipo}</div>
+                    <div class="vaga-salario">💰 ${vaga.salario}</div>
+                    <div class="vaga-requisitos">
+                        <h4>Requisitos:</h4>
+                        <ul>
+                            ${vaga.requisitos.map(req => `<li>${req}</li>`).join('')}
+                        </ul>
+                    </div>
+                    <p>${vaga.descricao}</p>
+                    <button class="btn-candidatar" onclick="abrirModal('${vaga.titulo}', '${vaga.empresa}')">Candidatar-se</button>
+                </div>
+            `;
+        }
 
-      if (vagas.length === 0) {
-        const row = tbody.insertRow();
-        const cell = row.insertCell();
-        cell.colSpan = 6;
-        cell.textContent = "Nenhuma vaga publicada.";
-        cell.style.textAlign = 'center';
-        return;
-      }
+        function filtrarVagas() {
+            const busca = document.getElementById('busca').value.toLowerCase();
+            const tipo = document.getElementById('filtroTipo').value;
+            const local = document.getElementById('filtroLocal').value;
 
-      vagas.forEach(vaga => {
-        const row = tbody.insertRow();
-        row.insertCell().textContent = vaga.cnpj;
-        row.insertCell().textContent = vaga.empresa;
-        row.insertCell().textContent = vaga.email;
-        row.insertCell().textContent = vaga.vaga;
-        row.insertCell().textContent = vaga.contratacao;
-        row.insertCell().textContent = vaga.publicadoPor;
-      });
-    }
+            const vagasFiltradas = vagasFicticias.filter(vaga => {
+                const matchBusca = vaga.titulo.toLowerCase().includes(busca) || 
+                                 vaga.empresa.toLowerCase().includes(busca);
+                const matchTipo = !tipo || vaga.tipo === tipo;
+                const matchLocal = !local || vaga.localizacao === local;
+                return matchBusca && matchTipo && matchLocal;
+            });
 
-    // Carrega as vagas assim que a página for aberta
-    window.onload = carregarVagas;
-  </script>
+            const vagasGrid = document.getElementById('vagasGrid');
+            if (vagasFiltradas.length === 0) {
+                vagasGrid.innerHTML = '<div class="sem-vagas">Nenhuma vaga encontrada com os filtros selecionados.</div>';
+            } else {
+                vagasGrid.innerHTML = vagasFiltradas.map(criarCardVaga).join('');
+            }
+        }
 
+        // Funções do Modal
+        function abrirModal(titulo, empresa) {
+            const modal = document.getElementById('modalCandidatura');
+            modal.style.display = 'flex';
+            document.querySelector('.modal-header h3').textContent = `Candidatar-se: ${titulo} - ${empresa}`;
+        }
+
+        function fecharModal() {
+            const modal = document.getElementById('modalCandidatura');
+            modal.style.display = 'none';
+        }
+
+        // Event Listeners
+        document.getElementById('busca').addEventListener('input', filtrarVagas);
+        document.getElementById('filtroTipo').addEventListener('change', filtrarVagas);
+        document.getElementById('filtroLocal').addEventListener('change', filtrarVagas);
+        document.querySelector('.close-modal').addEventListener('click', fecharModal);
+        document.getElementById('formCandidatura').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Candidatura enviada com sucesso!');
+            fecharModal();
+        });
+
+        // Fechar modal ao clicar fora
+        window.onclick = function(event) {
+            const modal = document.getElementById('modalCandidatura');
+            if (event.target === modal) {
+                fecharModal();
+            }
+        }
+
+        // Carregar vagas iniciais
+        filtrarVagas();
+
+        // Modal de cadastro de vaga
+        const btnCadastrarVaga = document.getElementById('btnCadastrarVaga');
+        const modalCadastroVaga = document.getElementById('modalCadastroVaga');
+        const closeModalCadastro = document.querySelector('.close-modal-cadastro');
+        const formCadastroVaga = document.getElementById('formCadastroVaga');
+
+        btnCadastrarVaga.addEventListener('click', () => {
+            modalCadastroVaga.style.display = 'flex';
+        });
+        closeModalCadastro.addEventListener('click', () => {
+            modalCadastroVaga.style.display = 'none';
+        });
+        window.addEventListener('click', (event) => {
+            if (event.target === modalCadastroVaga) {
+                modalCadastroVaga.style.display = 'none';
+            }
+        });
+        formCadastroVaga.addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Vaga cadastrada com sucesso! Aguarde a aprovação.');
+            modalCadastroVaga.style.display = 'none';
+            formCadastroVaga.reset();
+        });
+    </script>
+    <footer>© Copyright 2024 Grupo CMR Turma 2701. Todos os direitos reservados.</footer>
 </body>
 </html>
